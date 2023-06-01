@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import store from './features/store'
 import {Provider} from 'react-redux'
+import {fetchAuthors} from './features/authorSlice'
+store.dispatch(fetchAuthors())
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

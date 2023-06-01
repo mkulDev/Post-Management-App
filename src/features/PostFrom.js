@@ -18,6 +18,7 @@ const PostForm = () => {
   const savePost = () => {
     if (!canSave) return
     dispatch(AddPost(title, description, author))
+    console.log(title, description, author)
     setTitle('')
     setAuthor('')
     setDescription('')

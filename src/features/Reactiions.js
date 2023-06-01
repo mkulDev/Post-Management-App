@@ -3,10 +3,12 @@ import {FaRegThumbsUp} from 'react-icons/fa'
 import {BiHeart} from 'react-icons/bi'
 import {useDispatch, useSelector} from 'react-redux'
 import {AddLikes} from './postSlice'
+import {allPosts} from './postSlice'
 
 const Reactiions = ({postId}) => {
   const dispatch = useDispatch()
-  const post = useSelector((state) => state.posts.find((post) => post.id === postId))
+
+  const post = useSelector((state) => allPosts(state).find((post) => post.id === postId))
   return (
     <div className='reactions'>
       <div>

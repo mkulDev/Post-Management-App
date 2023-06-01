@@ -1,38 +1,18 @@
-import {createSlice, nanoid} from '@reduxjs/toolkit'
+import {createSlice, nanoid, createAsyncThunk} from '@reduxjs/toolkit'
 import {sub} from 'date-fns'
 
-const initialState = [
-  {
-    id: 0,
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit!',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eaque recusandae, velit rerum distinctio ab vel eum nostrum quos quo, possimus expedita, accusantium asperiores iste ipsam nemo unde minima. Necessitatibus!',
-    date: sub(new Date(), {minutes: 10}).toISOString(),
-    likes: {
-      thumbsUp: 2,
-      hearts: 0,
-    },
-  },
-  {
-    id: 1,
-    title: 'Lorem ipsum dolor sit amet.',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eaque recusandae, velit rerum distinctio ab vel eum nostrum quos quo, possimus expedita, accusantium asperiores iste ipsam nemo unde minima. Necessitatibus!',
-    date: sub(new Date(), {minutes: 123}).toISOString(),
-    likes: {
-      thumbsUp: 1,
-      hearts: 4,
-    },
-  },
-  {
-    id: 2,
-    title: 'Lorem ipsum dolor!',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut eaque recusandae, velit rerum distinctio ab vel eum nostrum quos quo, possimus expedita, accusantium asperiores iste ipsam nemo unde minima. Necessitatibus!',
-    date: sub(new Date(), {minutes: 43}).toISOString(),
-    likes: {
-      thumbsUp: 2,
-      hearts: 2,
-    },
-  },
-]
+const baseURL = 'https://jsonplaceholder.typicode.com/posts'
+
+const initialState = {
+  posts: [],
+  status: 'idle',
+  error: null,
+}
+
+export const fetchPosts = createAsyncThunk('posts.fetchPosts', async () => {
+  const response = await fetch(baseURL).then((data) => data.json())
+  return response
+})
 
 const postSlice = createSlice({
   name: 'posts',
@@ -40,14 +20,14 @@ const postSlice = createSlice({
   reducers: {
     AddPost: {
       reducer(state, action) {
-        state.push(action.payload)
+        state.posts.push(action.payload)
       },
       prepare(title, description, author) {
         return {
           payload: {
             id: nanoid(),
             title,
-            description,
+            body: description,
             author,
             date: new Date().toISOString(),
             likes: {
@@ -61,14 +41,39 @@ const postSlice = createSlice({
     AddLikes(state, action) {
       const {postId, reaction} = action.payload
 
-      const selectedPost = state.find((post) => post.id === postId)
+      const selectedPost = state.posts.find((post) => post.id === postId)
 
       if (selectedPost) {
         selectedPost.likes[reaction]++
       }
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = 'succeded'
+        let minuts = 1
+        const loadedPosts = action.payload.map((post) => {
+          post.date = sub(new Date(), {minutes: minuts++}).toISOString()
+          post.likes = {
+            thumbsUp: 0,
+            hearts: 0,
+          }
+          return post
+        })
+        state.posts = state.posts.concat(loadedPosts)
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+  },
 })
-
+export const allPosts = (state) => state.posts.posts
+export const getPostStatus = (state) => state.posts.status
+export const getPostError = (state) => state.posts.error
 export const {AddPost, AddLikes} = postSlice.actions
 export default postSlice.reducer
