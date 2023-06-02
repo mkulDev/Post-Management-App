@@ -15,7 +15,7 @@ const authorSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchAuthors.fulfilled, (state, action) => {
-      return [...action.payload]
+      return action.payload
     })
   },
 })

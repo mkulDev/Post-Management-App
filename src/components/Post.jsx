@@ -40,7 +40,7 @@ const Post = () => {
     </article>
   ))
   if (postsStatus === 'idle') return 'Loading ... Please Wait'
-  if (postsStatus === 'failed') return `Sorry, but something has gone wrong. Here is an error ${getPostError}`
+  if (postsStatus === 'failed') return `Sorry, but something has gone wrong. Here is an error ${postsErrors}`
   return (
     <div>
       <PostForm />

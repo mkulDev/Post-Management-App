@@ -22,13 +22,13 @@ const postSlice = createSlice({
       reducer(state, action) {
         state.posts.push(action.payload)
       },
-      prepare(title, description, author) {
+      prepare(title, description, userId) {
         return {
           payload: {
             id: nanoid(),
             title,
             body: description,
-            author,
+            userId,
             date: new Date().toISOString(),
             likes: {
               thumbsUp: 0,

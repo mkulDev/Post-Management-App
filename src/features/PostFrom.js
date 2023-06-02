@@ -17,8 +17,8 @@ const PostForm = () => {
   const canSave = Boolean(author) && Boolean(title) && Boolean(description)
   const savePost = () => {
     if (!canSave) return
-    dispatch(AddPost(title, description, author))
-    console.log(title, description, author)
+    const userId = authors.find((element) => element.name === author).id
+    dispatch(AddPost(title, description, userId))
     setTitle('')
     setAuthor('')
     setDescription('')
