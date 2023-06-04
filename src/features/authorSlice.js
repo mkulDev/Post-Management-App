@@ -4,9 +4,10 @@ const baseURL = 'https://jsonplaceholder.typicode.com/users'
 
 const initialState = []
 
-export const fetchAuthors = createAsyncThunk('posts.fetchAuthors', async () => {
-  const response = await fetch(baseURL).then((data) => data.json())
-  return response
+export const fetchAuthors = createAsyncThunk('authors.fetchAuthors', async () => {
+  const response = await fetch(baseURL)
+  const data = await response.json()
+  return data
 })
 
 const authorSlice = createSlice({
