@@ -156,6 +156,45 @@ article {
 button:hover {
   background-color: #1b839d;
 }
+
+.loading-ring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e8e8e8;
+  width: 100vw;
+  height: 100vh;
+}
+.loading-ring:after {
+  content: ' ';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #9e9e9e;
+  border-color: #9e9e9e transparent #9e9e9e transparent;
+  animation: loading-ring 1.2s linear infinite;
+}
+
+@keyframes loading-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width: 768px) {
   form {
     width: 80vw;

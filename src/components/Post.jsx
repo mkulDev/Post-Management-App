@@ -15,7 +15,7 @@ const Post = () => {
   const postsErrors = useSelector(getPostError)
 
   useEffect(() => {
-    if (postsStatus === 'idle') {
+    if (postsStatus === null) {
       dispatch(fetchPosts())
     }
   }, [postsStatus, dispatch])
@@ -39,8 +39,8 @@ const Post = () => {
       </div>
     </article>
   ))
-  if (postsStatus === 'idle') return 'Loading ... Please Wait'
-  if (postsStatus === 'failed') return `Sorry, but something has gone wrong. Here is an error ${postsErrors}`
+  if (postsStatus === true) return <div class='loading-ring'></div>
+  if (postsStatus === false && postsErrors) return `Sorry, but something has gone wrong. Here is an error ${postsErrors}`
   return (
     <div>
       <PostForm />
