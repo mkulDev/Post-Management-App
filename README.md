@@ -1,27 +1,31 @@
-# React + TypeScript + Vite
+# Post Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The **Post Management App** is a web application built with React and Redux for managing and displaying posts authored by various users. This application allows users to view, create, and react to posts. It also demonstrates best practices in structuring a React application, handling asynchronous operations with Redux Thunk, and responsive design using CSS.
 
-Currently, two official plugins are available:
+<img src='./public/screen1.jpg' width=600px />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What I Have Learned
+During the development of this project, I have learned and applied the following skills and concepts:
 
-## Expanding the ESLint configuration
+Creating a structured React application with modular components.
+Managing application state using Redux and Redux Thunk for asynchronous actions.
+Building user-friendly forms for data input and submission.
+Implementing responsive web design with CSS to ensure compatibility across devices.
+Leveraging third-party APIs, such as JSONPlaceholder, for testing and prototyping.
+The most important aspect was refactoring code from JavaScript to TypeScript.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## About
 
-- Configure the top-level `parserOptions` property like this:
+The **Post Management App** is designed to showcase how to build a modern web application using React and Redux. It demonstrates the base concepts for further implementation.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Technologies Used
+React 
+Redux 
+Typescript
+JSONPlaceholder: A fake online REST API for testing and prototyping.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+### Installation
+Clone the repository to your local machine:
+git clone https://github.com/mkulDev/Redux-simple-form.git
+
