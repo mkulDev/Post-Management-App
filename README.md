@@ -19,10 +19,10 @@ The most important aspect was refactoring code from JavaScript to TypeScript.
 The **Post Management App** is designed to showcase how to build a modern web application using React and Redux. It demonstrates the base concepts for further implementation.
 
 ## Technologies Used
-React 
-Redux 
-Typescript
-JSONPlaceholder: A fake online REST API for testing and prototyping.
+-React 
+-Redux 
+-Typescript
+-JSONPlaceholder: A fake online REST API for testing and prototyping.
 
 
 ### Installation
