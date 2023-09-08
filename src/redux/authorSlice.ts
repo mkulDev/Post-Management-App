@@ -1,8 +1,16 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const baseURL = 'https://jsonplaceholder.typicode.com/users'
 
-const initialState = []
+interface Author {
+  id: number
+  name: string
+  username: string
+  email: string
+}
+
+type AuthorsState = Author[]
+const initialState: AuthorsState = []
 
 export const fetchAuthors = createAsyncThunk('authors.fetchAuthors', async () => {
   const response = await fetch(baseURL)
@@ -15,10 +23,11 @@ const authorSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchAuthors.fulfilled, (state, action) => {
+    builder.addCase(fetchAuthors.fulfilled, (_state, action) => {
       return action.payload
+      // return [...state, action.payload].flat()
     })
-  },
+  }
 })
-export const allAuthors = (state) => state.authors
+
 export default authorSlice.reducer
